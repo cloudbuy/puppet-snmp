@@ -451,17 +451,6 @@ class snmp (
     }
   }
 
-  file { 'snmptrapd.conf':
-    ensure  => $file_ensure,
-    mode    => $snmp::params::service_config_perms,
-    owner   => 'root',
-    group   => $snmp::params::service_config_dir_group,
-    path    => $snmp::params::trap_service_config,
-    content => template('snmp/snmptrapd.conf.erb'),
-    require => Package['snmpd'],
-    notify  => $snmptrapd_conf_notify,
-  }
-
   if $::osfamily == 'RedHat' {
     file { 'snmptrapd.sysconfig':
       ensure  => $file_ensure,
@@ -477,7 +466,6 @@ class snmp (
     service { 'snmptrapd':
       ensure     => $trap_service_ensure_real,
       name       => $trap_service_name,
-      alias      => 'snmptrapd',
       enable     => $trap_service_enable_real,
       hasstatus  => $trap_service_hasstatus,
       hasrestart => $trap_service_hasrestart,
@@ -493,7 +481,6 @@ class snmp (
     service { 'snmptrapd':
       ensure     => $trap_service_ensure_real,
       name       => $trap_service_name,
-      alias      => 'snmptrapd',
       enable     => $trap_service_enable_real,
       hasstatus  => $trap_service_hasstatus,
       hasrestart => $trap_service_hasrestart,
@@ -507,7 +494,6 @@ class snmp (
     service { 'snmptrapd':
       ensure     => $trap_service_ensure_real,
       name       => $trap_service_name,
-      alias      => 'snmptrapd',
       enable     => $trap_service_enable_real,
       hasstatus  => $trap_service_hasstatus,
       hasrestart => $trap_service_hasrestart,
@@ -518,10 +504,20 @@ class snmp (
     }
   }
 
+  file { 'snmptrapd.conf':
+    ensure  => $file_ensure,
+    mode    => $snmp::params::service_config_perms,
+    owner   => 'root',
+    group   => $snmp::params::service_config_dir_group,
+    path    => $snmp::params::trap_service_config,
+    content => template('snmp/snmptrapd.conf.erb'),
+    require => Package['snmpd'],
+    notify  => $snmptrapd_conf_notify,
+  }
+
   service { 'snmpd':
     ensure     => $service_ensure_real,
     name       => $service_name,
-    alias      => 'snmpd',
     enable     => $service_enable_real,
     hasstatus  => $service_hasstatus,
     hasrestart => $service_hasrestart,

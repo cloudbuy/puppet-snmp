@@ -405,7 +405,6 @@ class snmp (
   package { 'snmpd':
     ensure => $package_ensure,
     name   => $package_name,
-    alias  => 'snmpd',
   }
 
   file { 'var-net-snmp':
@@ -477,7 +476,6 @@ class snmp (
     service { 'snmptrapd':
       ensure     => $trap_service_ensure_real,
       name       => $trap_service_name,
-      alias      => 'snmptrapd',
       enable     => $trap_service_enable_real,
       hasstatus  => $trap_service_hasstatus,
       hasrestart => $trap_service_hasrestart,
@@ -493,7 +491,6 @@ class snmp (
     service { 'snmptrapd':
       ensure     => $trap_service_ensure_real,
       name       => $trap_service_name,
-      alias      => 'snmptrapd',
       enable     => $trap_service_enable_real,
       hasstatus  => $trap_service_hasstatus,
       hasrestart => $trap_service_hasrestart,
@@ -503,11 +500,10 @@ class snmp (
         Exec['install /etc/init.d/snmptrapd'],
       ],
     }
-  } elsif $::osfamily == 'FreeBSD' {
+  } elsif ($::osfamily == 'FreeBSD') or ($::osfamily == 'OpenBSD') {
     service { 'snmptrapd':
       ensure     => $trap_service_ensure_real,
       name       => $trap_service_name,
-      alias      => 'snmptrapd',
       enable     => $trap_service_enable_real,
       hasstatus  => $trap_service_hasstatus,
       hasrestart => $trap_service_hasrestart,
@@ -521,7 +517,6 @@ class snmp (
   service { 'snmpd':
     ensure     => $service_ensure_real,
     name       => $service_name,
-    alias      => 'snmpd',
     enable     => $service_enable_real,
     hasstatus  => $service_hasstatus,
     hasrestart => $service_hasrestart,

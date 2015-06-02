@@ -381,6 +381,28 @@ class snmp::params {
       $trap_service_name        = 'snmptrapd'
       $snmptrapd_options        = ''
     }
+    'OpenBSD': {
+      $package_name             = 'net-snmp'
+      $service_config_dir_path  = '/etc/snmp'
+      $service_config_dir_perms = '0755'
+      $service_config_dir_owner = 'root'
+      $service_config_dir_group = 'wheel'
+      $service_config           = '/etc/snmp/snmpd.conf'
+      $service_config_perms     = '0755'
+      $service_name             = 'netsnmpd'
+      $snmpd_options            = 'd'
+      $var_net_snmp             = '/var/net-snmp'
+      $varnetsnmp_perms         = '0600'
+      $varnetsnmp_owner         = 'root'
+      $varnetsnmp_group         = 'wheel'
+
+      $client_package_name      = 'net-snmp'
+      $client_config            = '/etc/snmp/snmp.conf'
+
+      $trap_service_config      = '/etc/snmp/snmptrapd.conf'
+      $trap_service_name        = 'netsnmptrapd'
+      $snmptrapd_options        = ''
+    }
     default: {
       fail("Module ${::module} is not supported on ${::operatingsystem}")
     }

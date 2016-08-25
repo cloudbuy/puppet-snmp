@@ -108,7 +108,7 @@ class snmp::params {
     default => $::snmp_services,
   }
 
-  $openmanage_enable = $::openmanage_enable ? {
+  $openmanage_enable = defined('$::openmanage_enable') ? {
     false   => false,
     default => $::openmanage_enable
   }

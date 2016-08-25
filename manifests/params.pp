@@ -16,184 +16,184 @@
 class snmp::params {
   # If we have a top scope variable defined, use it, otherwise fall back to a
   # hardcoded value.
-  $agentaddress = $::snmp_agentaddress ? {
-    undef   => [ 'udp:127.0.0.1:161', 'udp6:[::1]:161' ],
+  $agentaddress = defined('defined('$::snmp_agentaddress')') ? {
+    false   => [ 'udp:127.0.0.1:161', 'udp6:[::1]:161' ],
     default => $::snmp_agentaddress,
   }
 
-  $snmptrapdaddr = $::snmp_snmptrapdaddr ? {
-    undef   => [ 'udp:127.0.0.1:162', 'udp6:[::1]:162' ],
+  $snmptrapdaddr = defined('defined('$::snmp_snmptrapdaddr')') ? {
+    false   => [ 'udp:127.0.0.1:162', 'udp6:[::1]:162' ],
     default => $::snmp_snmptrapdaddr,
   }
 
-  $ro_community = $::snmp_ro_community ? {
-    undef   => 'public',
+  $ro_community = defined('defined('$::snmp_ro_community')') ? {
+    false   => 'public',
     default => $::snmp_ro_community,
   }
 
-  $ro_community6 = $::snmp_ro_community6 ? {
-    undef   => 'public',
+  $ro_community6 = defined('defined('$::snmp_ro_community6')') ? {
+    false   => 'public',
     default => $::snmp_ro_community6,
   }
 
-  $rw_community = $::snmp_rw_community ? {
-    undef   => undef,
+  $rw_community = defined('$::snmp_rw_community') ? {
+    false   => undef,
     default => $::snmp_rw_community,
   }
 
-  $rw_community6 = $::snmp_rw_community6 ? {
-    undef   => undef,
+  $rw_community6 = defined('$::snmp_rw_community6') ? {
+    false   => undef,
     default => $::snmp_rw_community6,
   }
 
-  $ro_network = $::snmp_ro_network ? {
-    undef   => '127.0.0.1',
+  $ro_network = defined('$::snmp_ro_network') ? {
+    false   => '127.0.0.1',
     default => $::snmp_ro_network,
   }
 
-  $ro_network6 = $::snmp_ro_network6 ? {
-    undef   => '::1',
+  $ro_network6 = defined('$::snmp_ro_network6') ? {
+    false   => '::1',
     default => $::snmp_ro_network6,
   }
 
-  $rw_network = $::snmp_rw_network ? {
-    undef   => '127.0.0.1',
+  $rw_network = defined('$::snmp_rw_network') ? {
+    false   => '127.0.0.1',
     default => $::snmp_rw_network,
   }
 
-  $rw_network6 = $::snmp_rw_network6 ? {
-    undef   => '::1',
+  $rw_network6 = defined('$::snmp_rw_network6') ? {
+    false   => '::1',
     default => $::snmp_rw_network6,
   }
 
-  $contact = $::snmp_contact ? {
-    undef   => 'Unknown',
+  $contact = defined('$::snmp_contact') ? {
+    false   => 'Unknown',
     default => $::snmp_contact,
   }
 
-  $location = $::snmp_location ? {
-    undef   => 'Unknown',
+  $location = defined('$::snmp_location') ? {
+    false   => 'Unknown',
     default => $::snmp_location,
   }
 
-  $sysname = $::snmp_sysname ? {
-    undef   => $::fqdn,
+  $sysname = defined('$::snmp_sysname') ? {
+    false   => $::fqdn,
     default => $::snmp_sysname,
   }
 
-  $com2sec = $::snmp_com2sec ? {
-    undef   => [
+  $com2sec = defined('$::snmp_com2sec') ? {
+    false   => [
       "notConfigUser  default       public",
     ],
     default => $::snmp_com2sec,
   }
 
-  $com2sec6 = $::snmp_com2sec6 ? {
-    undef   => [
+  $com2sec6 = defined('$::snmp_com2sec6') ? {
+    false   => [
       "notConfigUser  default       public",
     ],
     default => $::snmp_com2sec6,
   }
 
-  $groups = $::snmp_groups ? {
-    undef   => [
+  $groups = defined('$::snmp_groups') ? {
+    false   => [
       'notConfigGroup v1            notConfigUser',
       'notConfigGroup v2c           notConfigUser',
     ],
     default => $::snmp_groups,
   }
 
-  $services = $::snmp_services ? {
-    undef   => 72,
+  $services = defined('$::snmp_services') ? {
+    false   => 72,
     default => $::snmp_services,
   }
 
   $openmanage_enable = $::openmanage_enable ? {
-    undef   => false,
+    false   => false,
     default => $::openmanage_enable
   }
 
-  $views = $::snmp_views ? {
-    undef   => [
+  $views = defined('$::snmp_views') ? {
+    false   => [
       'systemview    included   .1.3.6.1.2.1.1',
       'systemview    included   .1.3.6.1.2.1.25.1.1',
     ],
     default => $::snmp_views,
   }
 
-  $accesses = $::snmp_accesses ? {
-    undef   => [
+  $accesses = defined('$::snmp_accesses') ? {
+    false   => [
       'notConfigGroup ""      any       noauth    exact  systemview none  none',
     ],
     default => $::snmp_accesses,
   }
 
-  $dlmod = $::snmp_dlmod ? {
-    undef   => [],
+  $dlmod = defined('$::snmp_dlmod') ? {
+    false   => [],
     default => $::snmp_dlmod,
   }
 
-  $disable_authorization = $::snmp_disable_authorization ? {
-    undef   => 'no',
+  $disable_authorization = defined('$::snmp_disable_authorization') ? {
+    false   => 'no',
     default => $::snmp_disable_authorization,
   }
 
-  $do_not_log_traps = $::snmp_do_not_log_traps ? {
-    undef   => 'no',
+  $do_not_log_traps = defined('$::snmp_do_not_log_traps') ? {
+    false   => 'no',
     default => $::snmp_do_not_log_traps,
   }
 
-  $do_not_log_tcpwrappers = $::snmp_do_not_log_tcpwrappers ? {
-    undef   => 'no',
+  $do_not_log_tcpwrappers = defined('$::snmp_do_not_log_tcpwrappers') ? {
+    false   => 'no',
     default => $::snmp_do_not_log_tcpwrappers,
   }
 
-  $trap_handlers = $::snmp_trap_handlers ? {
-    undef   => [],
+  $trap_handlers = defined('$::snmp_trap_handlers') ? {
+    false   => [],
     default => $::snmp_trap_handlers,
   }
 
-  $trap_forwards = $::snmp_trap_forwards ? {
-    undef   => [],
+  $trap_forwards = defined('$::snmp_trap_forwards') ? {
+    false   => [],
     default => $::snmp_trap_forwards,
   }
 
-  $snmp_config = $::snmp_snmp_config ? {
-    undef   => [],
+  $snmp_config = defined('$::snmp_snmp_config') ? {
+    false   => [],
     default => $::snmp_snmp_config,
   }
 
-  $snmpd_config = $::snmp_snmpd_config ? {
-    undef   => [],
+  $snmpd_config = defined('$::snmp_snmpd_config') ? {
+    false   => [],
     default => $::snmp_snmpd_config,
   }
 
-  $snmptrapd_config = $::snmp_snmptrapd_config ? {
-    undef   => [],
+  $snmptrapd_config = defined('$::snmp_snmptrapd_config') ? {
+    false   => [],
     default => $::snmp_snmptrapd_config,
   }
 
 ### The following parameters should not need to be changed.
 
-  $ensure = $::snmp_ensure ? {
-    undef   => 'present',
+  $ensure = defined('$::snmp_ensure') ? {
+    false   => 'present',
     default => $::snmp_ensure,
   }
 
-  $service_ensure = $::snmp_service_ensure ? {
-    undef   => 'running',
+  $service_ensure = defined('$::snmp_service_ensure') ? {
+    false   => 'running',
     default => $::snmp_service_ensure,
   }
 
-  $trap_service_ensure = $::snmp_trap_service_ensure ? {
-    undef   => 'stopped',
+  $trap_service_ensure = defined('$::snmp_trap_service_ensure') ? {
+    false   => 'stopped',
     default => $::snmp_trap_service_ensure,
   }
 
   # Since the top scope variable could be a string (if from an ENC), we might
   # need to convert it to a boolean.
-  $autoupgrade = $::snmp_autoupgrade ? {
-    undef   => false,
+  $autoupgrade = defined('$::snmp_autoupgrade') ? {
+    false   => false,
     default => $::snmp_autoupgrade,
   }
   if is_string($autoupgrade) {
@@ -202,13 +202,13 @@ class snmp::params {
     $safe_autoupgrade = $autoupgrade
   }
 
-  $install_client = $::snmp_install_client ? {
-    undef   => undef,
+  $install_client = defined('$::snmp_install_client') ? {
+    false   => undef,
     default => $::snmp_install_client,
   }
 
-  $manage_client = $::snmp_manage_client ? {
-    undef   => false,
+  $manage_client = defined('$::snmp_manage_client') ? {
+    false   => false,
     default => $::snmp_manage_client,
   }
   if is_string($manage_client) {
@@ -217,8 +217,8 @@ class snmp::params {
     $safe_manage_client = $manage_client
   }
 
-  $service_enable = $::snmp_service_enable ? {
-    undef   => true,
+  $service_enable = defined('$::snmp_service_enable') ? {
+    false   => true,
     default => $::snmp_service_enable,
   }
   if is_string($service_enable) {
@@ -227,8 +227,8 @@ class snmp::params {
     $safe_service_enable = $service_enable
   }
 
-  $service_hasstatus = $::snmp_service_hasstatus ? {
-    undef   => true,
+  $service_hasstatus = defined('$::snmp_service_hasstatus') ? {
+    false   => true,
     default => $::snmp_service_hasstatus,
   }
   if is_string($service_hasstatus) {
@@ -237,8 +237,8 @@ class snmp::params {
     $safe_service_hasstatus = $service_hasstatus
   }
 
-  $service_hasrestart = $::snmp_service_hasrestart ? {
-    undef   => true,
+  $service_hasrestart = defined('$::snmp_service_hasrestart') ? {
+    false   => true,
     default => $::snmp_service_hasrestart,
   }
   if is_string($service_hasrestart) {
@@ -247,8 +247,8 @@ class snmp::params {
     $safe_service_hasrestart = $service_hasrestart
   }
 
-  $trap_service_enable = $::snmp_trap_service_enable ? {
-    undef   => false,
+  $trap_service_enable = defined('$::snmp_trap_service_enable') ? {
+    false   => false,
     default => $::snmp_trap_service_enable,
   }
   if is_string($trap_service_enable) {
@@ -257,8 +257,8 @@ class snmp::params {
     $safe_trap_service_enable = $trap_service_enable
   }
 
-  $trap_service_hasstatus = $::snmp_trap_service_hasstatus ? {
-    undef   => true,
+  $trap_service_hasstatus = defined('$::snmp_trap_service_hasstatus') ? {
+    false   => true,
     default => $::snmp_trap_service_hasstatus,
   }
   if is_string($trap_service_hasstatus) {
@@ -267,8 +267,8 @@ class snmp::params {
     $safe_trap_service_hasstatus = $trap_service_hasstatus
   }
 
-  $trap_service_hasrestart = $::snmp_trap_service_hasrestart ? {
-    undef   => true,
+  $trap_service_hasrestart = defined('$::snmp_trap_service_hasrestart') ? {
+    false   => true,
     default => $::snmp_trap_service_hasrestart,
   }
   if is_string($trap_service_hasrestart) {

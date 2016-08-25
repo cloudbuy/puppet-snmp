@@ -16,22 +16,22 @@
 class snmp::params {
   # If we have a top scope variable defined, use it, otherwise fall back to a
   # hardcoded value.
-  $agentaddress = defined('defined('$::snmp_agentaddress')') ? {
+  $agentaddress = defined('$::snmp_agentaddress') ? {
     false   => [ 'udp:127.0.0.1:161', 'udp6:[::1]:161' ],
     default => $::snmp_agentaddress,
   }
 
-  $snmptrapdaddr = defined('defined('$::snmp_snmptrapdaddr')') ? {
+  $snmptrapdaddr = defined('$::snmp_snmptrapdaddr') ? {
     false   => [ 'udp:127.0.0.1:162', 'udp6:[::1]:162' ],
     default => $::snmp_snmptrapdaddr,
   }
 
-  $ro_community = defined('defined('$::snmp_ro_community')') ? {
+  $ro_community = defined('$::snmp_ro_community') ? {
     false   => 'public',
     default => $::snmp_ro_community,
   }
 
-  $ro_community6 = defined('defined('$::snmp_ro_community6')') ? {
+  $ro_community6 = defined('$::snmp_ro_community6') ? {
     false   => 'public',
     default => $::snmp_ro_community6,
   }

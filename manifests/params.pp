@@ -351,6 +351,7 @@ class snmp::params {
       $client_config            = '/etc/snmp/snmp.conf'
 
       $trap_service_config      = '/etc/snmp/snmptrapd.conf'
+      $trap_service_name        = 'snmptrapd'
       $snmptrapd_options        = '-Lsd -p /var/run/snmptrapd.pid'
     }
     'Suse': {
